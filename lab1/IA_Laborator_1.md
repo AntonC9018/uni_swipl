@@ -26,7 +26,7 @@ female(ana). % pentru punct C.
 % Este oare X parintele lui Y?
 parent(ion, dana). parent(ion, vica). parent(diana, dana). parent(diana, vica).
 parent(nastea, olga). parent(dima, olga). parent(nastea, grigore). parent(dima, grigore).
-parent(olga, vica).
+parent(olga, ana).
 parent(grigore, eugen).
 parent(ion_1, ion_2). % pentru punct C.
 
@@ -152,7 +152,7 @@ Y = grigore ;
 X = dima,
 Y = grigore ;
 X = olga,
-Y = vica ;
+Y = ana ;
 X = grigore,
 Y = eugen ;
 X = ion_1,
