@@ -36,7 +36,7 @@ power(X, N, R) :- N > 0, X > 0, N1 is N - 1, power(X, N1, R1), R is X * R1.
 % X % X = 0.
 mod1(X, X, 0).
                  % X % Y = (X - Y) % Y.
-mod1(X, Y, R) :- X > Y, X1 is X - Y, mod1(X1, Y, R);
+mod1(X, Y, R) :- X > Y -> X1 is X - Y, mod1(X1, Y, R);
                  % Insa daca X < Y, X este rezultatul.
                  X < Y, R = X.
 
@@ -53,7 +53,7 @@ predecessor(X, Y) :- X > 1, X1 is X - 1, predecessor(X1, Y1), Y is Y1 + 1.
 % X / X = 1.
 div1(X, X, 1).
                  % X / Y = (X - Y) / Y.
-div1(X, Y, R) :- X > Y, X1 is X - Y, div1(X1, Y, R1), R is R1 + 1;
+div1(X, Y, R) :- X > Y -> X1 is X - Y, div1(X1, Y, R1), R is R1 + 1;
                  % Insa daca X < Y, X / Y = 0.
                  X < Y, R is 0.
 

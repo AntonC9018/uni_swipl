@@ -1,3 +1,12 @@
+# Inteligenta Artificiala, laborator nr.5.
+
+A elaborat: **Curmanschii Anton, IA1901**.
+
+Nu pastez aici sarcinile, deoarece ele coincid cu comentariile asupra predicatelor realizate. 
+
+## Codul 
+
+```prolog 
 % 1.
 % Să se scrie programul pentru sortarea unei liste numerice 
 % în ordine crescătoare, prin metoda „naivă”: se generează 
@@ -49,3 +58,36 @@ subset([X|L], R) :- subset(L, R1), (R = R1 ; R = [X|R1]).
 % Insasi functie
 % sum_list este functia standarta, ce sumeaza toate elementele dintr-o lista.
 subset_where_sum_is(L, Sum, R) :- subset(L, Subset), sum_list(Subset, Sum), R = Subset.
+```
+
+## Executarea.
+
+```prolog
+?- dumb_sort([1, 5, 0, 2, 6], R).
+R = [0, 1, 2, 5, 6] ;
+false.
+
+?- insertion_sort([1, 5, 0, 2, 6], R).
+R = [0, 1, 2, 5, 6] ;
+false.
+
+?- subset_where_sum_is([1, 2, 3, 4, 5, 6, 7], 7, R).
+R = [1, 2, 4] ;
+R = [3, 4] ;
+R = [2, 5] ;
+R = [1, 6] ;
+R = [7] ;
+false.
+
+?- subset_where_sum_is([], 7, R).
+false.
+
+?- subset_where_sum_is([], 0, R).
+R = [].
+```
+
+## Comentarii
+
+Am invatat triucul cu `takeout` pe [aici](https://www.cpp.edu/~jrfisher/www/prolog_tutorial/pt_framer.html).
+
+Mai nu am nimic de adaugat, deoarece algoritmele sunt deja comentate in cod.

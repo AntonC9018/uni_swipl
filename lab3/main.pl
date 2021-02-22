@@ -48,7 +48,7 @@ delete(X, [X|L], R) :- delete(X, L, R).
 delete(X, [Y|L], [Y|R]) :- delete(X, L, R), X \== Y. 
 % B) Se elimina elementul de pe pozitia N. Aici folosim indexarea zero.
 delete_at([_|L], 0, L).
-delete_at([], _, []). 
+delete_at([], _, []).
 delete_at([X|L], N, [X|R]) :- N > 0, N1 is N - 1, delete_at(L, N1, R).
 % C) Se calculeaza lungimea unei liste.
 length1([], 0).
@@ -62,7 +62,7 @@ count_occurences(X, [Y|L], Count) :-
     ( X == Y 
     -> Count is Count1 + 1
     ;  Count is Count1
-    ).
+    ). 
 % B) Calculeaza suma elementelor.
 sum([], 0).
 sum([X|L], R) :- sum(L, R1), R is R1 + X.

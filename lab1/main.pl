@@ -20,6 +20,7 @@ female(ana). % pentru punct C.
 parent(ion, dana). parent(ion, vica). parent(diana, dana). parent(diana, vica).
 parent(nastea, olga). parent(dima, olga). parent(nastea, grigore). parent(dima, grigore).
 parent(olga, ana).
+parent(ana, diana).
 parent(grigore, eugen).
 parent(ion_1, ion_2). % pentru punct C.
 
