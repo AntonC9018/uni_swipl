@@ -1,0 +1,8 @@
+sequence --> [a], abc_(N), de_(M), 
+             { S is N + M, S >= 1 }.
+
+abc_(0) --> [].
+abc_(N) --> [a,b,c], abc_(N1), { N is N1 + 1 }.
+
+de_(0)  --> [].
+de_(M)  --> [d,e], de_(M1), { M is M1 + 1 }.

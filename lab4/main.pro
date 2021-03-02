@@ -71,7 +71,7 @@ skip([_|L], N, R) :- N > 0, N1 is N - 1, skip(L, N1, R).
 
 % 7. Să se scrie predicatul care verifică dacă o listă este prefixul altei liste.
 prefix([], _).
-prefix([X|Prefix], [Y|L]) :- X == Y, prefix(Prefix, L).
+prefix([X|Prefix], [X|L]) :- prefix(Prefix, L).
 
 
 % 8. Să se scrie predicatul care verifică dacă un element 
