@@ -14,7 +14,7 @@ Varianta 7.
 4. `Iona` nu are 8 ani. 
 5. La 5 ani ai săi `Robe` un copil mai mic decât cel ce străluceşte în `litere`.
 
-## Realizare
+## Soluționare
 
 Traducem într-un limbaj mai apropiat de prolog.
 

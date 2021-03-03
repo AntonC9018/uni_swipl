@@ -6,7 +6,7 @@ takeout(X, [H|T], [H|R]) :- takeout(X, T, R).
 tuple_combination([[X|Rest]], [X], [Rest]). 
 % If head is a list, return combinations of it with the other lists
 tuple_combination([H|T], R, [HRest|TRest]) :- 
-        T \= [],
+        T \== [],
         is_list(H), 
         tuple_combination(T, R1, TRest), 
         takeout(X, H, HRest), 
@@ -33,7 +33,7 @@ brights(R) :-
     ),
 
     % Becca is 4 and is not good at math
-    member([becca, 4, D_Becca], R), D_Becca \= math, 
+    member([becca, 4, D_Becca], R), D_Becca \== math, 
     
     % computer_magician is older than Stu by 1 year.
     member([_, Age_Magician, computer_magician], R),
@@ -41,7 +41,7 @@ brights(R) :-
     Age_Magician is Age_Stu + 1,
 
     % Iona is not 8
-    member([iona, A_Iona, _], R), A_Iona \= 8, 
+    member([iona, A_Iona, _], R), A_Iona \== 8, 
 
     % Robe is 5 and is younger than the grammar guy
     member([robe, 5, _], R),

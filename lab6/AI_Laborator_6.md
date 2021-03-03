@@ -8,7 +8,7 @@ Varianta 7.
 
 Să se scrie un program Prolog care realizează automatul finit ce recunoaşte cuvintele de forma $a(abc)^{n}(ab)^{m}, n \geq 0, m \geq 0, n + m \geq 1$
 
-## Realizare și explicații.
+## Soluționare și explicații.
 
 Pentru informație referitor la parsing în Prolog, am accesat [această pagină](https://www.cpp.edu/~jrfisher/www/prolog_tutorial/7_1.html). În scurt, Prolog-ul recunoaște o sintaxă specială, numită DCG, care permite să implementăm parser-uri sau chiar și generatori de text (sau de liste). 
 
