@@ -26,7 +26,7 @@ Având trei liste: lista de nume `[rose, becca, stu, iona, robe]`, lista de vâr
 5. `(robe, 5, _)`;
 6. `(_, X, grammar)`, unde `X` > 5.
 
-Problema, descrisă astfel, este de fapt rezolvată. Mai jos vedeți predicatul care soluționează problema propusă. El returnează o listă cu rezultat.
+Problema, descrisă astfel, este de fapt deja rezolvată — rămâne numai să convertăm pasii de mai sus în cod. Mai jos vedeți predicatul care soluționează problema propusă. El returnează o listă cu rezultatul.
 
 ```prolog
 % returns a list of pairs [ [Name, Age, Occupation], ... ]
@@ -72,7 +72,7 @@ tuple_combinations(L, R) :-
     R = [Tuple|R1].
 ```
 
-Deci, la început este găsită o combinație posibilă pentru un element din fiecare sublistă din lista de intrare L, ca un tuplu, pe urmă este generată o combinație a celorlaltor elemente, și, în sfârșit, acel prim tuplu este concatenat cu restul tuplurilor.
+Deci, la început este găsită o combinație posibilă de câte un element din fiecare sublistă din lista de intrare L, ca un tuplu, pe urmă este generată o combinație a celorlaltor elemente, și, în sfârșit, acel prim tuplu este concatenat cu restul tuplurilor, pe care le-am obținut prin recursie.
 
 Funcția `tuple_combination/3` returnează un tuplu selectat, și sublistele modificate (fără elementele strânse). Folosim recursia. Dacă a rămas doar o sublistă, luăm doar primul element, ca să evităm repetări.
 
@@ -158,7 +158,7 @@ R = [[robe, 5, math], [becca, 4, piano], [rose, 8, computer_magician], [stu, 7, 
 false.
 ```
 
-Dacă eliminăm, de exemplu, condiția cu violinul, vom avea mai multe răspunsuri.
+Dacă eliminăm, de exemplu, condiția cu violinul, vom primi mai multe răspunsuri.
 
 ```
 1 ?- brights(R).

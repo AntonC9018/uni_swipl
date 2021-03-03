@@ -12,27 +12,27 @@ Să se realizeze în Prolog jocul **Chibriturile**. Pe masă sunt aşezate 23 ch
 
 ### Soluția matematică
 
-Vom incerca sa intelegem joaca un pic mai bine. Deci, este evident, că la orice stare a jocului, cu strategia optimă, unul din jucătorilor mereu câștigă, dar altul — mereu pierde.
+Vom incerca sa intelegem joaca un pic mai bine. Deci, este evident, că la orice stare a jocului, cu strategia optimă, unul din jucătorilor mereu câștigă, iar altul mereu pierde.
 
-Deci, dacă a rămas numai o chibrită (x = 1), și este rândul jucătorului 1, el a pierdut, fiindcă este nevoit de a lua ultima chibrită. Pentru x = 2, jucătorul poate lua 1, astfel câștigând. Asemănător pentru x = 3 și x = 4. Însă, dacă x = 5, jucătorul pierde, deoarece atunci celălalt jucător nimerește în poziția numai ce explicată. Deci, vom face un tabel cu rezultatele pentru fiecare din poziții. (W = Win, L = Lose).
+De exemplu, dacă a rămas numai o chibrită (x = 1), și este rândul jucătorului 1, el a pierdut, fiindcă este nevoit să ia ultima chibrită. Pentru x = 2, jucătorul poate lua 1, astfel câștigând. Asemănător pentru x = 3 și x = 4. Însă, dacă x = 5, jucătorul pierde, deoarece atunci celălalt jucător nimerește în poziția numai ce explicată. Vom face un tabel cu rezultatele pentru fiecare din poziții. (W = Win, L = Lose).
 
 |1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|
 |-|-|-|-|-|-|-|-|-|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 |L|W|W|W|L|W|W|W|L| W| W| W| L| W| W| W| L| W| W| W| L| W| W|
 
-Din acest tabel se observă formula generală: jucătorul curent va câștiga, dacă $(x - 1) mod 4 > 0$. Deci, strategia optimă va lucra prin aducerea valorii lui x în afară acestui interval (fiindcă atunci oponentul va nimeri în poziția L).
+Din acest tabel se observă formula generală: jucătorul curent va câștiga, dacă $(x - 1) \mod 4 > 0$. Deci, strategia optimă va lucra prin aducerea valorii lui x în afară acestui interval (fiindcă atunci oponentul va nimeri în poziția L).
 
 ```prolog
 matches_think(X, Action, Outcome) :- X1 is X - 1, Mod is X1 mod 4,
     % Winning position. To keep winning, get it into the losing range
     (Mod > 0) -> Action = Mod, Outcome = win
-    % if in a losing position, stalling probably makes most sense
+    % If in a losing position, stalling probably makes most sense
     ; Action = 1, Outcome = lose.
 ```
 
 ### Soluția recursivă
 
-O altă soluție ar fi una recursivă. Pentru numărul de chibrituri curent, X, Același AI este cerut de găsit o mișcare optimă pentru fiecare mișcare curent posibilă. În sfârșit, recursia ne aduce la cazul de bază.
+O altă soluție ar fi una recursivă. Pentru numărul de chibrituri curent, `X`, Același AI este cerut de găsit o mișcare optimă pentru fiecare mișcare curent posibilă. În sfârșit, recursia ne aduce la cazul de bază. Mișcarea corectă va fi acea mișcare care aduce oponentul la pierdere, adică rezultatul prevăzut pentru care este `lose`.
 
 ```prolog
 matches_think_recursive(1, 1, lose). 

@@ -12,9 +12,9 @@ Fie date trei bidoane – unul de 14 litri, unul de 8 litri şi unul de 5 litri.
 
 Putem formaliza problema propusă prin 3 numere, fiecare număr să reprezente câte litre de apă avem în fiecare bidon. Vom încerca să umplem câte un bidon, după ce vom face recursie pe starea rezultantă. 
 
-Pot prevede o problemă cu așa algoritm: deadlock-uri (recursia infinită). Presupunem că avem 5 litre în bidonul de 8 litre și 0 în bidonul de 5 litre. Atunci o secvență validă de acțiuni după algoritmul dat va fi de a turna 5 litre de la bidonul de 8 litre, umplând-ul, după ce a-l goli, turnând acele 5 litre înapoi în bidonul de 8 litre. Vom nota acțiunele cu o astfel de notație: `[5,8]` înseamnă a turna din 5 în 8. Datorită restrângerilor problemei, putem mereu determina câte litre au fost turnate după așa informație. Deci, situația descrisă mai sus, va fi notată ca `[8,5], [5,8], [8,5], [5,8], ...` până la infinit.
+Pot prevede o problemă cu așa algoritm: deadlock-uri (recursia infinită). Presupunem că avem 5 litre în bidonul de 8 litre și 0 în bidonul de 5 litre. Atunci o secvență validă de acțiuni după algoritmul dat va fi de a turna 5 litre de la bidonul de 8 litre în bidonul de 5 litre, umplând-ul, după ce a-l goli, turnând acele 5 litre înapoi în bidonul de 8 litre. Vom nota acțiunele cu o astfel de notație: `[5,8]` înseamnă a turna din 5 în 8. Datorită restrângerilor problemei, putem mereu determina câte litre au fost turnate după așa informație, având starea curentă. Deci, situația descrisă mai sus ar fi notată ca `[8,5], [5,8], [8,5], [5,8], ...` până la infinit.
 
-Cea mai simplă soluție la această problemă este de păstrat o listă cu toate stările trecute și de a verifica dacă sistemul deja a fost în starea nouă, înainte de a o fixa.
+Cea mai simplă soluție la această problemă este de a păstra o listă cu toate stările trecute și de a verifica dacă sistemul deja a fost în starea nouă, înainte de a o fixa.
 
 ## Interpretarea programatică
 
@@ -39,17 +39,17 @@ cans_advance_state(State, Action, New_State) :-
 
 Ca să verificăm rezultatul unei acțiuni, facem următorul lucru:
 
-1. Indexăm starea pentru a primi valorile curente ale bidoanelor DIN care va fi turnată apa (adică `Starea[Primul_Indice]`) și ÎN care ea va fi turnată. Salvăm aceste valori în variabile `From_Amount` și `To_Amount`, respectiv.
+1. Indexăm starea pentru a primi valorile curente ale bidoanelor din care va fi turnată apa (adică `Starea[Primul_Indice]`) și în care ea va fi turnată. Salvăm aceste valori în variabile `From_Amount` și `To_Amount`, respectiv.
 
-2. Calculăm suma lor, adică câtă apă ar fi în bidonul `To` dacă am turna toată apa din bidonul `From` acolo.
+2. Calculăm suma lor, adică câtă apă ar fi în bidonul `To` dacă am turna toată apa din bidonul `From` acolo. O salvăm în variabila `Sum`.
 
 3. Luăm valoarea-limită pentru bidonul To, adică capacitatea bidonului (salvăm ca `To_Limit`).
 
-4. Calculăm valoarea de `Overflow`, adică câtă apă nu poate fi turnată în bidonul `To` (ar fi revărsată). `Overflow = max(Suma - To_Limit, 0)`.
+4. Calculăm valoarea de `Overflow`, adică câtă apă nu poate fi turnată în bidonul `To` (ar fi revărsată). `Overflow = max(Sum - To_Limit, 0)`.
 
 5. Calculăm valorile noi pentru `To_Amount`, `To_Final_Amount = Suma - Overflow` și `From_Amount`, `From_Final_Amount = Overflow`.
 
-6. Dacă valorile noi sunt diferite de cele trecute, starea nouă este una validă (este de ajuns de verificat dacă o singură pereche de valori este diferită).
+6. Dacă valorile noi sunt diferite de cele trecute, starea s-a schimbat (este de ajuns de verificat dacă o singură pereche de valori este diferită). Dacă starea nu s-a schimbat, o aruncăm.
 
 ```prolog
 % 14, 8, 5 liters
@@ -83,7 +83,7 @@ cans_action_modify_state([Can_From, Can_To], State, New_State) :-
     replace_at(Can_To, To_Final_Amount, New_State1, New_State).
 ```
 
-Având această funcție, putem folosi recursia pentru a genera o listă de acțiuni consecutive care aduce la starea finală. Ținem cont și de problema apariției repetate ale stărilor care adice la recursia infinită.
+Cu această funcție, putem folosi recursia pentru a genera o listă de acțiuni consecutive care aduc la starea finală. Ținem cont și de problema apariției repetate ale stărilor ce rezultă în recursia infinită.
 
 ```prolog
 % Gets an initial state and the states that the system has

@@ -12,15 +12,15 @@ Să se scrie un program Prolog care realizează automatul finit ce recunoaşte c
 
 Pentru informație referitor la parsing în Prolog, am accesat [această pagină](https://www.cpp.edu/~jrfisher/www/prolog_tutorial/7_1.html). În scurt, Prolog-ul recunoaște o sintaxă specială, numită DCG, care permite să implementăm parser-uri sau chiar și generatori de text (sau de liste). 
 
-Trecem la soluția exemplului meu. Ca să nu mă încurce, am hotărât să numesc predicatele cu `_` la sfârșit, dacă poate să conțină repetări, și calculează numărul de elemente. Deci, predicatul care consumă pattern-ul `abc` de 0+ ori ar fi numit `abc_`.
+Trecem la soluția exemplului meu. Ca să nu mă încurce, am hotărât să numesc predicatele cu `_` la sfârșit, dacă pot conține repetări, și calculează numărul de elemente. Deci, predicatul care consumă pattern-ul `abc` de 0+ ori ar fi numit `abc_`.
 
-Deci, definim prima regulă, sequence. Ea potrivește condiției din problemă: se potrivește o dată simbolul `a` prin sintaxa `[a]`, pe urmă de `N` ori (adică salvăm numărul de apariții în `N`) abc prin sintaxa `abc_(N)`, pe urmă de `M` ori secvența de prin regula `de_(M)`. După ce avem o expresie prolog încorporată, care verifică dacă `N + M` este mai mare sau egal ca 1. Expresiile prolog sunt încorporate, folosind paranteze acolade.
+Deci, definim prima regulă, `sequence`. Ea potrivește condiției din problemă: se potrivește o dată simbolul `a` prin sintaxa `[a]`, pe urmă de `N` ori (adică salvăm numărul de apariții în `N`) `abc` prin sintaxa `abc_(N)`, pe urmă de `M` ori secvența `de` prin regula `de_(M)`. După ce avem o expresie prolog încorporată, care verifică dacă `N + M` este mai mare sau egal ca 1. Expresiile prolog sunt încorporate, folosind paranteze acolade.
 ```
 sequence --> [a], abc_(N), de_(M), 
              { S is N + M, S >= 1 }.
 ```
 
-Pe urmă definim regulile pentru secvențele `abc` și `de`. Aici nu e nimic complicat. Prin `[a,b,c]` înregistrăm potrivirea următoare, după ce incrementăm contorul. Folosim recursia pentru a avea mai multe potriviri.
+Pe urmă definim regulile pentru secvențele `abc` și `de`. Aici nu e nimic complicat. Prin `[a,b,c]` înregistrăm potrivirea următoare, după ce incrementăm contorul. Folosim recursia pentru a captura mai multe potriviri.
 ```
 abc_(0) --> [].
 abc_(N) --> [a,b,c], abc_(N1), { N is N1 + 1 }.
@@ -41,7 +41,7 @@ de_(M)  --> [d,e], de_(M1), { M is M1 + 1 }.
 
 ## Executare
 
-În primul rând, putem utiliza comanda predicatul `listing/0` pentru a găsi cum au fost transformate expresiile descrise alterior. Găsim prin output-ul funcțiile noastre. Funcțiile date sunt clare după lucrări 1-5.
+În primul rând, utilizăm comanda predicatul `listing/0` pentru a găsi cum au fost transformate expresiile descrise anterior. Găsim prin output-ul funcțiile noastre. Modul de funcționare a funcțiilor generate este  clar după lucrările 1-5.
 ```prolog
 abc_(0, A, A).                   
 abc_(N, [a, b, c|A], B) :-       
@@ -63,7 +63,7 @@ sequence([a|A], B) :-
     B=D.                         
 ```
 
-De menționat un lucru. Predicatul creat ia doua parametre: lista, după care se recunoaște pattern-ul, și o listă care conține restul primei liste, după eliminarea elementelor potrivite. Deci la executare vom vedea mai multe variante posibile de acea listă, fiidncă putem avea mai multe combinații de numărul de grupuri de `abc` și de `de` potrivite.
+De menționat un lucru. Predicatul creat ia două parametre: lista, după care se recunoaște pattern-ul, și o listă care conține restul primei liste, după eliminarea elementelor potrivite. Deci la executare vom vedea mai multe variante posibile de acea listă, fiindcă putem avea mai multe combinații numărului de grupuri de `abc` și de `de` potrivite.
 
 ```
 1 ?- sequence([a,a,b,c,d,e],[]).       

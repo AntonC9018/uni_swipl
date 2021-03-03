@@ -8,7 +8,7 @@ A elaborat: **Curmanschii Anton, IA1901**.
 
 ## Soluționare
 
-Vom reprezenta starea curentă printr-o listă. Prin recursia vom itera prin această listă, incercând să facem o mișcare la fiecare poziție. Vom repeta acest ciclu, considerând starea noua ca starea curentă. Doatorită mecanismului de reincercare în sfârșit vom trece prin toate combinațiile posibile ale tablei. Pentru terminare, vom avea o regulă de bază.
+Vom reprezenta starea curentă printr-o listă. Prin recursia vom itera prin această listă, incercând să facem o mișcare la fiecare poziție. Vom repeta acest ciclu, considerând starea noua ca starea curentă. Datorită mecanismului de reincercare, în sfârșit vom trece prin toate combinațiile posibile ale tablei. Pentru terminare, vom avea o regulă de bază.
 
 ## Întregul cod
 
@@ -91,7 +91,7 @@ pawns_solve(State, R) :-
 
 ## Executare
 
-Primele mișcări arăt valide, deci funcția probabil dă rezultatul corect. Faptul că recursia se termină cu cazul de bază tot încurajează.
+Primele mișcări arată valide, deci funcția probabil dă rezultatul corect. Faptul că recursia se termină cu cazul de bază tot încurajează.
 
 ```
 1 ?- pawns_solve([w,w,w,n,b,b,b], R).

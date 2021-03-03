@@ -1,7 +1,7 @@
 matches_think(X, Action, Outcome) :- X1 is X - 1, Mod is X1 mod 4,
     % Winning position. To keep winning, get it into the losing range
     (Mod > 0) -> Action = Mod, Outcome = win
-    % if in a losing position, stalling probably makes most sense
+    % If in a losing position, stalling probably makes most sense
     ; Action = 1, Outcome = lose.
 
 matches_think_recursive(1, 1, lose). 
