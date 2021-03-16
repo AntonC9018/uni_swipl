@@ -6,7 +6,7 @@ A elaborat: **Curmanschii Anton, IA1901**.
 
 Varianta 7.
 
-Să se scrie un program Prolog care realizează automatul finit ce recunoaşte cuvintele de forma $a(abc)^{n}(ab)^{m}, n \geq 0, m \geq 0, n + m \geq 1$
+Să se scrie un program Prolog care realizează automatul finit ce recunoaşte cuvintele de forma $a(abc)^{n}(de)^{m}, n \geq 0, m \geq 0, n + m \geq 1$
 
 ## Soluționare și explicații.
 
