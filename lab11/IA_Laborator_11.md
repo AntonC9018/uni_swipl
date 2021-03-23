@@ -10,14 +10,14 @@ Fie dată gramatica
 $
 G = (V_N, V_T, P, S); V_N={S}, V_T={a}, 
 P =
-\\begin{cases}
-S \\rightarrow aaS \\\\
-S \\rightarrow a
-\\end{cases}
+\begin{cases}
+S \rightarrow aaS \\\\
+S \rightarrow a
+\end{cases}
 $
 
 Limbajul generat de această gramatică este: 
-$L(G)=\\\{a^{2i-1},i \\geq 1\\\}$. 
+$L(G)=\\{a^{2i-1},i \geq 1\\}$. 
 Să se scrie un program Prolog ce ar recunoaşte astfel de cuvinte.
 
 
@@ -26,7 +26,7 @@ Să se scrie un program Prolog ce ar recunoaşte astfel de cuvinte.
 Elementele gramaticii pot fi interpretate în contextul Prologului în felul următor:
 - $V_N$ este o mulțime ce conține numele predicatelor, utilizate la recunoașterea secvențelor valide de caractere.
 - $V_T$ este o mulțime de simboluri care pot fi utilizate în cuvinte.
-- $P$ este mulțimea corpurilor acelor simboluri.
+- $P$ este mulțimea corpurilor predicatelor din $V_N$.
 - $S$ este mulțimea predicatelor formate din predicate din $V_N$ care definesc structura șirurilor valide.
 
 
@@ -35,7 +35,7 @@ Elementele gramaticii pot fi interpretate în contextul Prologului în felul urm
 În cazul problemei aceste particulare:
 - $V_N = \\{ Sequence \\}$
 - $V_T = \\{ a \\}$
-- $P = \\{ Sequence \\rightarrow a; Sequence \\rightarrow a, a, Sequence \\}$
+- $P = \\{ Sequence \rightarrow a; Sequence \rightarrow a, a, Sequence \\}$
 - $S = \\{ Sequence \\}$
 
 Rezolvarea utilizând sintaxa DCG este trivială:
@@ -77,15 +77,15 @@ false.
 Să spunem că avem un caz ceva mai complicat (varianta 4):
 - $V_N = \\{ Sequence, A, B \\}$
 - $V_T = \\{ a, b, c \\}$
-- $P = \\left\\{
-\\begin{array}{c}
-    & Sequence \\rightarrow A, B \\\\
-    & A \\rightarrow a, A, b \\\\
-    & A \\rightarrow a, b \\\\
-    & B \\rightarrow c, B \\\\
-    & B \\rightarrow c
-\\end{array} \\right\\}$
-- $S = \\{ sequence \\}$
+- $P = \left\\{
+\begin{array}{c}
+    & Sequence \rightarrow A, B \\\\
+    & A \rightarrow a, A, b \\\\
+    & A \rightarrow a, b \\\\
+    & B \rightarrow c, B \\\\
+    & B \rightarrow c
+\end{array} \right\\}$
+- $S = \\{ Sequence \\}$
 
 Rezolvarea utilizând sintaxa DCG:
 ```prolog
