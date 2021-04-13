@@ -58,3 +58,35 @@ perms(L1, L2, L3, R) :- takeout(E1, L1, New_L1),
                         takeout(E3, L3, New_L3),
                         perms(New_L1, New_L2, New_L3, R1),
                         R = [[E1, E2, E3]|R1].*/
+
+brights2(R) :-
+    R = [
+        [4, becca, _], 
+        [5, robe,  _],
+        [6, _, _],
+        [7, _, violin],
+        [8, _, _]
+    ], 
+    
+    % computer_magician is older than Stu by 1 year.
+    member([Age_Magician, _, computer_magician], R),
+    member([Age_Stu, stu, _], R),
+    Age_Magician is Age_Stu + 1,
+
+    % Robe is 5 and is younger than the grammar guy
+    % (Age_Grammar = 6; Age_Grammar = 7; Age_Grammar = 8),
+    member(Age_Grammar, [6, 7, 8]),
+    member([Age_Grammar, _, grammar], R),
+
+    % Iona is not 8
+    % (A_Iona = 4; A_Iona = 5; A_Iona = 6; A_Iona = 7),
+    member(A_Iona, [4, 5, 6, 7]),
+    member([A_Iona, iona, _], R),
+    
+    % Becca is 4 and is not good at math
+    member(D_Becca, [piano, violin, computer_magician, grammar]),
+    member([4, becca, D_Becca], R),
+    
+    member([_, rose, _], R),
+    member([_, _, piano], R),
+    member([_, _, math], R).

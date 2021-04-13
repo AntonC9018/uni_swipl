@@ -73,3 +73,5 @@ pawns_solve(State, R) :-
     pawns_solve(New_State, R1),
     R = [Action|R1].
 
+
+pawns(R) :- pawns_solve([w,w,w,n,b,b,b], R).
